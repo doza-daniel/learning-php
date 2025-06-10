@@ -1,0 +1,9 @@
+.nav-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav {
+    display: inline-flex;
+}
+
