@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+form.login {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
