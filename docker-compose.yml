@@ -16,13 +16,15 @@ services:
       - ./vendor:/var/www/html/vendor
       - ./src:/var/www/html/src
 
-  mysql:
+  db:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: hello_world
+      MYSQL_DATABASE: playground
       MYSQL_USER: daniel
       MYSQL_PASSWORD: 654321
+    ports:
+      - 3306:3306
     volumes:
       - php_tutorial:/var/lib/mysql
 

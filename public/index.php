@@ -25,5 +25,8 @@ $app = new App();
       }
     ?>
   </h1>
+  <?php foreach ($app->getTitles() as $title) { ?>
+  <h1><?= $title ?></h1>
+  <?php } ?>
 </body>
 </html>
