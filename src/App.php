@@ -23,4 +23,24 @@ class App {
     public function getTitle(): string {
         return $this->title;
     }
+
+    public function isLoggedIn(): bool {
+      return isset($_SESSION['username']);
+    }
+
+    public function tryLogin(): bool {
+      if (!isset($_POST['username']) || !isset($_POST['password'])) {
+        return false;
+      }
+
+      return $this->login($_POST['username'], $_POST['password']);
+    }
+
+    /**
+     * @param string $username
+     * @param string $password
+     */
+    private function login($username, $password): bool {
+      return false;
+    }
 }

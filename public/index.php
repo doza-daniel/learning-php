@@ -1,3 +1,11 @@
+<?php
+session_start();
+require('src/App.php');
+
+use MyCompany\Playground\App;
+
+$app = new App();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,5 +15,15 @@
 <body>
   <?php include_once('src/parts/nav.html') ?>
   <hr />
+  <h1>
+    <?php
+      if ($app->isLoggedIn()) {
+        $username = $_SESSION['username'];
+        echo "Hello $username";
+      } else {
+        echo "Hello world";
+      }
+    ?>
+  </h1>
 </body>
 </html>

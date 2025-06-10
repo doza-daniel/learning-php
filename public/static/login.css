@@ -20,3 +20,7 @@ form.login {
   flex-direction: column;
   padding: 5px;
 }
+
+.warn-login-failed {
+  color: red;
+}
