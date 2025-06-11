@@ -72,10 +72,17 @@ class App {
    * @param string $password
    */
   private function login($username, $password): bool {
-    $stmt = $this->conn->prepare('SELECT username, password FROM users WHERE username = ?');
-    $stmt = $this->conn->execute([$username]);
+    $q = 'SELECT username, password FROM users WHERE username = :username';
+    $stmt = $this->conn->prepare($q);
+    $success = $stmt->execute(array('username' => $username));
+    if (!$success) {
+      return false;
+    }
     $user = $stmt->fetch();
-    $this->logger->info('step by step: ' . $user);
-    return password_verify($password, $user['password']);
+    if (password_verify($password, $user['password'])) {
+      $_SESSION['username'] = $username;
+      return true;
+    }
+    return false;
   }
 }

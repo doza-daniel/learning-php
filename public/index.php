@@ -13,7 +13,7 @@ $app = new App();
   <link rel="stylesheet" href="static/nav.css">
 </head>
 <body>
-  <?php include_once('src/parts/nav.html') ?>
+  <?php include_once('src/parts/nav.php') ?>
   <hr />
   <h1>
     <?php

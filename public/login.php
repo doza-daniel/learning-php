@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="static/login.css">
 </head>
 <body>
-  <?php include_once('src/parts/nav.html') ?>
+  <?php include_once('src/parts/nav.php') ?>
   <hr />
   <div class="container">
     <form class="login" action="login.php" method="POST">
