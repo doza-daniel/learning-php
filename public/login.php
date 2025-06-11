@@ -12,12 +12,12 @@ if ($app->isLoggedIn()) {
 
 $login_failed = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-   $success = $app->tryLogin();
-   if ($success) {
-     header('Location: index.php');
-     die();
-   }
-   $login_failed = true;
+  $success = $app->tryLogin();
+  if ($success) {
+    header('Location: index.php');
+    die();
+  }
+  $login_failed = true;
 }
 ?>
 <!DOCTYPE html>
@@ -43,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label>Password: </label>
         </div>
         <div class="form-column">
-          <input type="text" />
-          <input type="password" />
+          <input type="text" name="username" />
+          <input type="password" name="password"/>
         </div>
       </div>
       <div class="form-row">
