@@ -1,9 +1,3 @@
-<?php
-namespace MyCompany\Playground\parts;
-use MyCompany\Playground\App;
-$app = new App();
-?>
-
 <div class="nav-wrap">
     <nav>
         <a href="">Home</a> |

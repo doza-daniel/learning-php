@@ -1,10 +1,7 @@
-<?php
-session_start();
-require('src/App.php');
+<?php declare(strict_types = 1); 
 
-use MyCompany\Playground\App;
+namespace MyCompany\Playground\views;
 
-$app = new App();
 if ($app->isLoggedIn()) {
   header('Location: index.php');
   die();
@@ -28,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="static/login.css">
 </head>
 <body>
-  <?php include_once('src/parts/nav.php') ?>
+  <?php include_once('nav.php') ?>
   <hr />
   <div class="container">
     <form class="login" action="login.php" method="POST">

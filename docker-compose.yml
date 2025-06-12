@@ -13,8 +13,8 @@ services:
     image: phpkek:latest
     volumes:
       - ./public:/var/www/html
-      - ./vendor:/var/www/html/vendor
-      - ./src:/var/www/html/src
+      - ./vendor:/var/www/vendor
+      - ./src:/var/www/src
 
   db:
     image: mysql:8.0

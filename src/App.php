@@ -1,7 +1,5 @@
 <?php namespace MyCompany\Playground;
 
-require_once('vendor/autoload.php');
-
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\ConsoleOutput;
