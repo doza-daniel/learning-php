@@ -18,6 +18,8 @@ if (preg_match('/\/?login.php\/?$/', $uri)) {
   require('views/logout.php');
 } else if (preg_match('/\/?register.php\/?$/', $uri)) {
   require('views/register.php');
+} else if (preg_match('/\/?createPost.php(\/|\?)?$/', $uri)) {
+  require('views/createPost.php');
 } else {
   require('views/home.php');
 }
