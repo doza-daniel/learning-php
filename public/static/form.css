@@ -3,7 +3,7 @@
   justify-content: center;
 }
 
-form.login {
+form {
   display: flex;
   flex-direction: column;
 }
@@ -21,7 +21,7 @@ form.login {
   padding: 5px;
 }
 
-.warn-login-failed {
+.warn-form-failed {
   color: red;
 }
 

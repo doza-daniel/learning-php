@@ -83,4 +83,29 @@ class App {
     }
     return false;
   }
+
+  public function tryRegister(): bool {
+    if (!isset($_POST['username']) || !isset($_POST['password']) || !isset($_POST['confirm-password'])) {
+      return false;
+    }
+
+    if ($_POST['password'] !== $_POST['confirm-password']) {
+      return false;
+    }
+
+    return $this->register($_POST['username'], $_POST['password']);
+  }
+
+  private function register(string $username, string $password): bool {
+    $q = 'INSERT INTO users (username, password) VALUES (:username, :password)';
+    $stmt = $this->conn->prepare($q);
+    $success = $stmt->execute(
+      array('username' => $username, 'password' => password_hash($password, PASSWORD_BCRYPT))
+    );
+    if (!$success) {
+      return false;
+    }
+    $_SESSION['username'] = $username;
+    return true;
+  }
 }

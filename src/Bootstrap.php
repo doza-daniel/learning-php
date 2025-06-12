@@ -16,6 +16,8 @@ if (preg_match('/\/?login.php\/?$/', $uri)) {
   require('views/login.php');
 } else if (preg_match('/\/?logout.php\/?$/', $uri)) {
   require('views/logout.php');
+} else if (preg_match('/\/?register.php\/?$/', $uri)) {
+  require('views/register.php');
 } else {
   require('views/home.php');
 }
