@@ -41,18 +41,6 @@ class App {
     $this->logger->info('hello my loggers');
   }
 
-  /**
-   * @return titles
-   */
-  public function getTitles(): array {
-    $stmt = $this->conn->query('SELECT title FROM titles');
-    $result = array();
-    while ($row = $stmt->fetch()) {
-      array_push($result, $row['title']);
-    }
-    return $result;
-  }
-
   public function isLoggedIn(): bool {
     return isset($_SESSION['username']);
   }
@@ -70,7 +58,7 @@ class App {
    * @param string $password
    */
   private function login($username, $password): bool {
-    $q = 'SELECT username, password FROM users WHERE username = :username';
+    $q = 'SELECT id, username, password FROM users WHERE username = :username';
     $stmt = $this->conn->prepare($q);
     $success = $stmt->execute(array('username' => $username));
     if (!$success) {
@@ -78,7 +66,8 @@ class App {
     }
     $user = $stmt->fetch();
     if (password_verify($password, $user['password'])) {
-      $_SESSION['username'] = $username;
+      $_SESSION['username'] = $user['username'];
+      $_SESSION['userId'] = $user['id'];
       return true;
     }
     return false;
@@ -100,12 +89,43 @@ class App {
     $q = 'INSERT INTO users (username, password) VALUES (:username, :password)';
     $stmt = $this->conn->prepare($q);
     $success = $stmt->execute(
-      array('username' => $username, 'password' => password_hash($password, PASSWORD_BCRYPT))
+      array(
+        'username' => $username,
+        'password' => password_hash($password, PASSWORD_BCRYPT),
+      )
     );
     if (!$success) {
       return false;
     }
     $_SESSION['username'] = $username;
+    $_SESSION['userId'] = $this->conn->lastInsertId();
     return true;
+  }
+
+  public function tryCreatePost(): bool {
+    if (!isset($_POST['title']) || !isset($_POST['body'])) {
+      return false;
+    }
+
+    return $this->createPost($_POST['title'], $_POST['body']);
+  }
+
+  private function createPost(string $title, string $body): bool {
+    $q =
+<<<'EOF'
+INSERT INTO posts (title, body, poster_id, created_at)
+  VALUES
+  (:title, :body, :posterId, FROM_UNIXTIME(:createdAt))
+EOF;
+
+    $stmt = $this->conn->prepare($q);
+    return $stmt->execute(
+      array(
+        'title' => $title,
+        'body' => $body,
+        'posterId' => $_SESSION['userId'],
+        'createdAt' => time(),
+      )
+    );
   }
 }

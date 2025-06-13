@@ -21,7 +21,11 @@ form {
   padding: 5px;
 }
 
-.warn-form-failed {
+.error-form {
   color: red;
+}
+
+.success-form {
+  color: green;
 }
 

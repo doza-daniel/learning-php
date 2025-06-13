@@ -6,9 +6,13 @@ if (!$app->isLoggedIn()) {
   die();
 }
 
-$create_post_failed = false;
+$create_post_successful = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // TODO: handle post creation
+  if (!$app->tryCreatePost()) {
+    $create_post_successful = false;
+  } else {
+    $create_post_successful = true;
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -23,15 +27,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <hr />
   <div class="container">
     <form action="createPost.php" method="POST">
-      <?php if ($create_post_failed) { ?>
+      <?php if ($create_post_successful === false) { ?>
       <div class="form-row">
-          <span class='warn-form-failed'>Failed to create the post!</span>
+          <span class='error-form'>Failed to create the post!</span>
+      </div>
+      <?php } else if ($create_post_successful === true) { ?>
+      <div class="form-row">
+          <span class='success-form'>Post created successfully!</span>
       </div>
       <?php } ?>
       <label for"title">Title:</label>
       <input type="text" name="title">
       <label for"body">Body:</label>
       <textarea cols="80" rows="30" name="body"></textarea>
+      <input type="submit" name="submit" value="Create">
     </form>
   </div>
 </body>

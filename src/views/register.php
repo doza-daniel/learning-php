@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form class="register" action="register.php" method="POST">
       <?php if ($register_failed) { ?>
       <div class="form-row">
-          <span class='warn-form-failed'>Registration failed!</span>
+          <span class='error-form'>Registration failed!</span>
       </div>
       <?php } ?>
       <div class="form-row">

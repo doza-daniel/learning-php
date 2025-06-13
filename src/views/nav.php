@@ -3,7 +3,7 @@ namespace MyCompany\Playground\views;
 ?>
 <div class="nav-wrap">
     <nav>
-        <a href="">Home</a>
+        <a href="/">Home</a>
         <?php if ($app->isLoggedIn()) {?>
         | <form action="createPost.php">
             <input type="submit" value="+ New Post" />

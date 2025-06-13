@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form action="login.php" method="POST">
       <?php if ($login_failed) { ?>
       <div class="form-row">
-          <span class='warn-form-failed'>Login failed!</span>
+          <span class='error-form'>Login failed!</span>
       </div>
       <?php } ?>
       <div class="form-row">
