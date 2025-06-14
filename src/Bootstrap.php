@@ -21,5 +21,6 @@ if (preg_match('/\/?login.php\/?$/', $uri)) {
 } else if (preg_match('/\/?createPost.php(\/|\?)?$/', $uri)) {
   require('views/createPost.php');
 } else {
-  require('views/home.php');
+  $view = require('views/home.php');
+  $view($app);
 }

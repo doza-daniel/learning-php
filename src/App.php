@@ -6,6 +6,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use PDO;
 use Throwable;
 use Closure;
+use Exception;
 
 class App {
   private LoggerInterface $logger;
@@ -111,12 +112,12 @@ class App {
   }
 
   private function createPost(string $title, string $body): bool {
-    $q =
-<<<'EOF'
-INSERT INTO posts (title, body, poster_id, created_at)
-  VALUES
-  (:title, :body, :posterId, FROM_UNIXTIME(:createdAt))
-EOF;
+    $q = <<<'EOF'
+         INSERT INTO posts
+         (title, body, poster_id, created_at)
+         VALUES
+         (:title, :body, :posterId, FROM_UNIXTIME(:createdAt))
+         EOF;
 
     $stmt = $this->conn->prepare($q);
     return $stmt->execute(
@@ -127,5 +128,20 @@ EOF;
         'createdAt' => time(),
       )
     );
+  }
+
+  public function getPosts(): array {
+    $q = <<<'EOF'
+         SELECT p.title, p.body, p.created_at, u.username
+         FROM posts p JOIN users u ON p.poster_id = u.id
+         EOF;
+    $stmt = $this->conn->prepare($q);
+    $success = $stmt->execute();
+    if (!$success) {
+      throw new Exception("failed to retrieve posts; statement unsuccessful");
+    }
+
+    $posts = $stmt->fetchAll();
+    return $posts;
   }
 }

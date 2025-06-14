@@ -1,0 +1,22 @@
+.post {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: bold;
+  display: inline-flex;
+  align-self: flex-start;
+}
+
+.title {
+  display: inline-flex;
+  align-self: flex-end;
+}
+
+.body {
+  border: 1px solid black;
+  padding: 3px;
+}
+
